@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interactive Virtual Tour - Explore spaces in immersive 360°">
+    <title>Virtual Tour - MF Fitness</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Three.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Loading Virtual Tour...</p>
+            <div class="loading-bar">
+                <div id="loading-progress" class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="app" class="app-container">
+        
+        <!-- Floorplan View -->
+        <div id="floorplan-view" class="view-container active">
+            <div class="view-header">
+                <h1 class="view-title">MF Fitness - Floor Plan</h1>
+                <p class="view-subtitle">Click the hotspot to explore in 360°</p>
+            </div>
+            
+            <div class="floorplan-container">
+                <img id="floorplan-image" src="floorplans/IMG_4074.png" alt="Floor Plan" class="floorplan-image">
+                
+                <!-- Hotspot in center of room -->
+                <button id="room-hotspot" class="hotspot" aria-label="View room in 360°">
+                    <div class="hotspot-pulse"></div>
+                    <div class="hotspot-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 8v8m-4-4h8"/>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="view-footer">
+                <div class="info-card">
+                    <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="16" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12.01" y2="8"/>
+                    </svg>
+                    <span>Click the pulsing icon to enter the immersive 360° view</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 360° Viewer -->
+        <div id="viewer-360" class="view-container">
+            <div class="viewer-header">
+                <button id="back-button" class="control-button back-button" aria-label="Back to floor plan">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    <span>Back to Floor Plan</span>
+                </button>
+                
+                <h2 class="viewer-title">360° Room View</h2>
+                
+                <button id="fullscreen-button" class="control-button" aria-label="Toggle fullscreen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Three.js Canvas Container -->
+            <div id="canvas-container" class="canvas-container"></div>
+            
+            <!-- Viewer Controls -->
+            <div class="viewer-controls">
+                <button id="zoom-in" class="control-button zoom-button" aria-label="Zoom in">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35M11 8v6m-3-3h6"/>
+                    </svg>
+                </button>
+                <button id="zoom-out" class="control-button zoom-button" aria-label="Zoom out">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35M8 11h6"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Instructions Overlay -->
+            <div id="instructions-overlay" class="instructions-overlay">
+                <div class="instructions-content">
+                    <h3>How to Navigate</h3>
+                    <ul>
+                        <li><strong>Desktop:</strong> Click and drag to look around • Scroll to zoom</li>
+                        <li><strong>Mobile:</strong> Swipe to look around • Pinch to zoom</li>
+                    </ul>
+                    <button id="close-instructions" class="control-button">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
